@@ -1,0 +1,85 @@
+<%- include('../partials/header') %> 
+
+<h1 class="mb-4">Edit Service</h1>
+
+<!-- Form to edit an existing service -->
+<form action="/services/<%= service._id %>?_method=PUT" method="POST" class="row g-3">
+
+  <!-- Vehicle name field (pre-filled with current value) -->
+  <div class="col-md-6">
+    <label class="form-label">Vehicle Name</label>
+    <input
+      type="text"
+      name="vehicleName"
+      class="form-control"
+      value="<%= service.vehicleName %>"
+      required
+    >
+  </div>
+
+  <!-- Service type field -->
+  <div class="col-md-6">
+    <label class="form-label">Service Type</label>
+    <input
+      type="text"
+      name="serviceType"
+      class="form-control"
+      value="<%= service.serviceType %>"
+      required
+    >
+  </div>
+
+  <!-- Date of the service -->
+  <div class="col-md-4">
+    <label class="form-label">Service Date</label>
+    <!-- Convert JS Date to YYYY-MM-DD string for the date -->
+    <input
+      type="date"
+      name="serviceDate"
+      class="form-control"
+      value="<%= service.serviceDate.toISOString().slice(0,10) %>"
+      required
+    >
+  </div>
+
+  <!-- Cost -->
+  <div class="col-md-4">
+    <label class="form-label">Cost ($)</label>
+    <input
+      type="number"
+      name="cost"
+      class="form-control"
+      step="0.01"
+      value="<%= service.cost %>"
+    >
+  </div>
+
+  <!-- Mileage -->
+  <div class="col-md-4">
+    <label class="form-label">Mileage (km)</label>
+    <input
+      type="number"
+      name="mileage"
+      class="form-control"
+      value="<%= service.mileage %>"
+    >
+  </div>
+
+  <!-- Notes -->
+  <div class="col-12">
+    <label class="form-label">Notes</label>
+    <textarea
+      name="notes"
+      class="form-control"
+      rows="3"
+    ><%= service.notes %></textarea>
+  </div>
+
+  <!-- Buttons -->
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Update Service</button>
+    <a href="/services" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

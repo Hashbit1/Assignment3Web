@@ -1,0 +1,143 @@
+/* Overall page */
+body {
+  background-color: #ffffff;    /* almost black */
+  color: #000000;               /* light grey text */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+/* Add some space above and below main content on every page */
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-weight: 600;   /*bit bolder */
+  color: #f9fafb;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #000000 !important;  /* dark navy/black */
+  box-shadow: 0 2px 8px #00000099;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Table for service list */
+.table {
+  background-color: #000000;   /* dark slate */
+  border-radius: 6px;            /* Rounded cornors */
+  overflow: hidden;
+  color: #e5e7eb;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;    /* center text inside table cells */
+  border-color: #1f2937;
+}
+
+.table thead th {
+  text-transform: uppercase;   /* Uppercase headers */
+  font-size: 0.85rem;           
+  background-color: #020617;     
+}
+
+/* Change row color a bit when hovering so it feels interactive */
+.table tbody tr:hover {
+  background-color: #111827;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 4px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* Adds a small gap between buttons that are beside each other */
+.btn + .btn {
+  margin-left: 4px;
+}
+
+/* Lift on hover */
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Primary button color */
+.btn-primary {
+  background-color: #2680ff;
+  border-color: #2563eb;
+}
+
+.btn-primary:hover {
+  background-color: #2458e6;
+  border-color: #1d4ed8;
+}
+
+/* Secondary outline */
+.btn-outline-secondary {
+  border-color: #6b7280;
+  color: #e5e7eb;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+/* Forms */
+.form-label {
+  font-weight: 500;
+  color: #000000;
+}
+
+.form-control,
+textarea.form-control {
+  background-color: #616164;
+  border: 1px solid #474848;
+  color: #e5e7eb;
+}
+
+.form-control:focus {
+  background-color: #3a3b3c;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 0.1rem rgba(96, 165, 250, 0.4);
+  color: #ffffff;
+}
+
+.form-control::placeholder {
+  color: #bbbbbb; 
+}
+/* Warning alert */
+.alert-warning ul {
+  margin-bottom: 0;
+}
+
+/* Home page card */
+.text-center.py-5 {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #020617;
+  border-radius: 8px;
+  padding: 24px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  border: 1px solid #1f2937;
+}
+
+/* Footer */
+footer {
+  background-color: #020617;
+  color: #e5e5e5;
+  font-size: 0.85rem;
+  border-top: 1px solid #111827;
+}
+
+footer small {
+  opacity: 0.8;
+}

@@ -1,0 +1,80 @@
+<%- include('../partials/header') %>
+
+<h1 class="mb-4">Add New Service</h1>
+
+<!-- Form to add a brand new service record.-->
+<form action="/services" method="POST" class="row g-3">
+
+  <!-- Vehicle name -->
+  <div class="col-md-6">
+    <label class="form-label">Vehicle Name</label>
+    <input
+      type="text"
+      name="vehicleName"
+      class="form-control"
+      required
+    >
+  </div>
+
+  <!-- Type of service (oil change, tires, brakes) -->
+  <div class="col-md-6">
+    <label class="form-label">Service Type</label>
+    <input
+      type="text"
+      name="serviceType"
+      class="form-control"
+      placeholder="Oil Change, Tires, Brakes..."
+      required
+    >
+  </div>
+
+  <!-- Date of the service -->
+  <div class="col-md-4">
+    <label class="form-label">Service Date</label>
+    <input
+      type="date"
+      name="serviceDate"
+      class="form-control"
+      required
+    >
+  </div>
+
+  <!-- Cost of the service -->
+  <div class="col-md-4">
+    <label class="form-label">Cost ($)</label>
+    <input
+      type="number"
+      name="cost"
+      class="form-control"
+      step="0.01"
+    >
+  </div>
+
+  <!-- Mileage at the time of service -->
+  <div class="col-md-4">
+    <label class="form-label">Mileage (km)</label>
+    <input
+      type="number"
+      name="mileage"
+      class="form-control"
+    >
+  </div>
+
+  <!-- Optional notes field -->
+  <div class="col-12">
+    <label class="form-label">Notes</label>
+    <textarea
+      name="notes"
+      class="form-control"
+      rows="3"
+    ></textarea>
+  </div>
+
+  <!-- Buttons: save or go back without saving -->
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Save Service</button>
+    <a href="/services" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

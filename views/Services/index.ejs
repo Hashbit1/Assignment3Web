@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+<h1 class="mb-4">Service History</h1>
+
+<!-- Button to go to the add new service form -->
+<a href="/services/new" class="btn btn-primary mb-3">+ New Service</a>
+
+<% if (services.length === 0) { %>
+  <p>No services recorded yet.</p>
+<% } else { %>
+  <!-- Table to display all service records -->
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Vehicle</th>
+        <th>Service Type</th>
+        <th>Date</th>
+        <th>Cost</th>
+        <th>Mileage</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+       <!-- Loop through each service and output one row per record -->
+      <% services.forEach(service => { %>
+        <tr>
+          <td><%= service.vehicleName %></td>
+          <td><%= service.serviceType %></td>
+            <!-- Format the serviceDate as YYYY-MM-DD -->
+          <td><%= service.serviceDate.toISOString().slice(0,10) %></td>
+            <!-- Show cost and mileage with basic formatting -->
+          <td>$<%= service.cost %></td>
+          <td><%= service.mileage %> km</td>
+          <td><%= service.notes %></td>
+          <td>
+             <!-- Link to the edit form for this service -->
+            <a href="/services/<%= service._id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+              <!-- Link to the delete confirmation page for this service -->
+            <a href="/services/<%= service._id %>/delete" class="btn btn-sm btn-danger">Delete</a>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>
