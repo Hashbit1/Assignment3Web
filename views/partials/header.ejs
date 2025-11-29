@@ -19,13 +19,31 @@
 
 <!-- Top navigation bar that shows on every page -->
 <nav class="navbar navbar-dark bg-dark mb-4">
-  <div class="container">
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- Left side: app name -->
     <a class="navbar-brand" href="/">AutoCare Tracker</a>
-    <a class="btn btn-outline-light" href="/services">View Services</a>
-    <a class="btn btn-primary ms-2" href="/services/new">Add Service</a>
+
+    <!-- Right side: links + auth buttons -->
+    <div class="d-flex align-items-center gap-2">
+      <!-- Always show view/add buttons (you protect C/U/D in routes) -->
+      <a class="btn btn-outline-light" href="/services">View Services</a>
+      <a class="btn btn-primary" href="/services/new">Add Service</a>
+
+      <% if (user) { %>
+        <!-- When logged in, show name + logout -->
+        <span class="navbar-text ms-3">
+          Logged in as <strong><%= user.displayName %></strong>
+        </span>
+        <a class="btn btn-outline-light ms-2" href="/auth/logout">Logout</a>
+      <% } else { %>
+        <!-- When NOT logged in, show login buttons -->
+        <a class="btn btn-outline-light ms-3" href="/auth/google">Login with Google</a>
+        <a class="btn btn-outline-light" href="/auth/github">Login with GitHub</a>
+      <% } %>
+    </div>
   </div>
 </nav>
 
-<!-- Main content grows to fill the space and pushs it down-->
+<!-- Main content grows to fill the space and pushes footer down -->
 <main class="flex-grow-1">
   <div class="container">

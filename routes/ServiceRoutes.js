@@ -1,31 +1,31 @@
+// routes/ServiceRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const Service = require('../models/Service'); // Mongoose model
+const { ensureAuth } = require('../middleware/auth'); // middleware to protect C/U/D
 
-// Show the service history page with all services from the database
+// ---------------- READ: list all services (everyone can view) ----------------
 router.get('/', async (req, res) => {
   try {
-    // Find all services and sort them by date (oldest first)
+    // Find all services, sorted by date (oldest first)
     const services = await Service.find().sort({ serviceDate: 1 });
-
-     // Render the Services/index.ejs view and pass the list of services to it
-    res.render('Services/index', { services });
+    res.render('Services/index', { services }); // views/Services/index.ejs
   } catch (err) {
     console.error('Error fetching services:', err.message);
     res.status(500).send('Error fetching services');
   }
 });
 
-// Shows the form to add a new service record
-router.get('/new', (req, res) => {
-  res.render('Services/new');
+// ---------------- CREATE: show form (only logged-in users) ----------------
+router.get('/new', ensureAuth, (req, res) => {
+  // Only authenticated users can add new services
+  res.render('Services/new'); // views/Services/new.ejs
 });
 
-// Handle form submission to create a new service record
-router.post('/', async (req, res) => {
+// Handle form submission to create a new service
+router.post('/', ensureAuth, async (req, res) => {
   try {
-
-     // Create a new service document using the form data from req.body
     await Service.create({
       vehicleName: req.body.vehicleName,
       serviceType: req.body.serviceType,
@@ -35,7 +35,6 @@ router.post('/', async (req, res) => {
       notes: req.body.notes,
     });
 
-    //redirects back to the list of services
     res.redirect('/services');
   } catch (err) {
     console.error('Error creating service:', err.message);
@@ -43,26 +42,22 @@ router.post('/', async (req, res) => {
   }
 });
 
-//shows edit form
-router.get('/:id/edit', async (req, res) => {
+// ---------------- UPDATE: show edit form (only logged-in users) ----------------
+router.get('/:id/edit', ensureAuth, async (req, res) => {
   try {
-    // Look up the service by its MongoDB id
     const service = await Service.findById(req.params.id);
-
     if (!service) return res.status(404).send('Service not found');
 
-     // Renders the edit form and pass the existing service data into it
-    res.render('Services/edit', { service });
+    res.render('Services/edit', { service }); // views/Services/edit.ejs
   } catch (err) {
     console.error('Error loading service for edit:', err.message);
     res.status(500).send('Error loading service');
   }
 });
 
-// Updates a service
-router.put('/:id', async (req, res) => {
+// Handle PUT request to update a service
+router.put('/:id', ensureAuth, async (req, res) => {
   try {
-     // Find the service by id and update its fields with the new form data
     await Service.findByIdAndUpdate(
       req.params.id,
       {
@@ -76,7 +71,6 @@ router.put('/:id', async (req, res) => {
       { runValidators: true }
     );
 
-    // Redirect back to the list of services after updating
     res.redirect('/services');
   } catch (err) {
     console.error('Error updating service:', err.message);
@@ -84,22 +78,21 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Show delete confirmation
-router.get('/:id/delete', async (req, res) => {
+// ---------------- DELETE: confirmation page (only logged-in users) ----------------
+router.get('/:id/delete', ensureAuth, async (req, res) => {
   try {
     const service = await Service.findById(req.params.id);
     if (!service) return res.status(404).send('Service not found');
 
-     // Renders a delete confirmation view and show the service details
-    res.render('Services/delete', { service });
+    res.render('Services/delete', { service }); // views/Services/delete.ejs
   } catch (err) {
     console.error('Error loading delete page:', err.message);
     res.status(500).send('Error loading delete page');
   }
 });
 
-// Fully deletes the service after the user confirms
-router.delete('/:id', async (req, res) => {
+// Handle DELETE request to remove a service
+router.delete('/:id', ensureAuth, async (req, res) => {
   try {
     await Service.findByIdAndDelete(req.params.id);
     res.redirect('/services');
