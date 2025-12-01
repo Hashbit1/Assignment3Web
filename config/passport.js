@@ -25,7 +25,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,         // from .env
       clientSecret: process.env.GOOGLE_CLIENT_SECRET, // from .env
-      callbackURL: '/auth/google/callback',
+      callbackURL: 'https://assignment3web.onrender.com/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -60,7 +60,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,         // from .env
       clientSecret: process.env.GITHUB_CLIENT_SECRET, // from .env
-      callbackURL: '/auth/github/callback',
+      callbackURL: 'https://assignment3web.onrender.com/auth/github/callback', 
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
